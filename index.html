@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Dog Image Viewer</title>
+    <style>
+      body {
+        text-align: center;
+        font-family: Arial;
+      }
+      img {
+        margin-top: 20px;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🐾 Random Dog Image</h1>
+    <button onclick="getDogImage()">Get Dog</button>
+    <div id="image-container"></div>
+
+    <script>
+      async function getDogImage() {
+        try {
+          const res = await fetch("/dog");
+          const data = await res.json();
+          document.getElementById("image-container").innerHTML =
+            `<img src="${data.image}" width="300"/>`;
+        } catch (err) {
+          document.getElementById("image-container").textContent =
+            "Error fetching image";
+        }
+      }
+    </script>
+  </body>
+</html>
